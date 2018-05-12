@@ -7,16 +7,24 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
   <body>
-    <div id="app3">
-      <p v-if="seen">現在你看到我了</p>
+    <div id="app4">
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
     </div>
     <!-- built files will be auto injected -->
   </body>
   <script>
     var app = new Vue({
-      el: '#app3',
+      el: '#app4',
       data: {
-        seen: true
+        todos: [
+          { text: '學習 Javascript' },
+          { text: '學習 Vue' },
+          { text: '整個牛項目' }
+        ]
       }
     })
   </script>
