@@ -8,8 +8,8 @@
   </head>
   <body>
     <div id="app8">
-      <p>Original message: "{{ message }}"</p>
-      <p>Computed reversed message: "{{ reversedMessage }}"</p>
+      <p>{{ now }}</p>
+      <p>{{ getnow() }}</p>
     </div>
   </body>
   <script>
@@ -19,8 +19,13 @@
         message: 'Hello'
       },
       computed: {
-        reversedMessage() {
-          return this.message.split('').reverse().join('')
+        now() {
+          return new Date()
+        }
+      },
+      methods: {
+        getnow() {
+          return new Date()
         }
       }
     })
