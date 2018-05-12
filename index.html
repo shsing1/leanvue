@@ -7,24 +7,22 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
   <body>
-    <div id="app4">
-      <ol>
-        <li v-for="todo in todos">
-          {{ todo.text }}
-        </li>
-      </ol>
+    <div id="app5">
+      <p>{{ message }}</p>
+      <input v-model="message">
+      <button @click="reverseMessage">逆轉消息</button>
     </div>
-    <!-- built files will be auto injected -->
   </body>
   <script>
     var app = new Vue({
-      el: '#app4',
+      el: '#app5',
       data: {
-        todos: [
-          { text: '學習 Javascript' },
-          { text: '學習 Vue' },
-          { text: '整個牛項目' }
-        ]
+        message: 'Hello Vue.js'
+      },
+      methods: {
+        reverseMessage() {
+          this.message = this.message.split('').reverse().join('')
+        }
       }
     })
   </script>
