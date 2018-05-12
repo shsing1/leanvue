@@ -8,15 +8,16 @@
   </head>
   <body>
     <div id="app8">
+      <span>Message: {{ msg }}</span>
+      <br>
+      <span v-once>這個將不會改變{{ msg }}</span>
     </div>
   </body>
   <script>
     var vm  = new Vue({
+      el: '#app8',
       data: {
-        a: 1
-      },
-      created() {
-        console.log('a is:' + this.a)
+        msg: 'test'
       }
     })
   </script>
