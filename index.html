@@ -8,16 +8,15 @@
   </head>
   <body>
     <div id="app8">
-      <span>Message: {{ msg }}</span>
-      <br>
-      <span v-once>這個將不會改變{{ msg }}</span>
+      <p>Using mustaches: {{ rawHtml }}</p>
+      <p>Using v-html directive: <span v-html="rawHtml"></span></p>
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app8',
       data: {
-        msg: 'test'
+        rawHtml: '<span style="color:red">This should be red.</span>'
       }
     })
   </script>
