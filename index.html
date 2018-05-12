@@ -7,19 +7,19 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
   <body>
-    <div id="app7">
-      <p>{{ foo }}</p>
-      <button @click="foo='baz'">Chang it</button>
+    <div id="app8">
     </div>
   </body>
   <script>
-    var obj = {
-      foo: 'bar'
-    }
-    Object.freeze(obj)
-    new Vue({
-      el: '#app7',
-      data: obj
+    var data = {a: 1}
+    var vm  = new Vue({
+      el: '#app8',
+      data: data
+    })
+    console.log(vm.$data === data)
+    console.log(vm.$el === document.getElementById('app8'))
+    vm.$watch('a', (newVaule, oldValue) => {
+      console.log('watch')
     })
   </script>
 </html>
