@@ -11,15 +11,13 @@
     </div>
   </body>
   <script>
-    var data = {a: 1}
     var vm  = new Vue({
-      el: '#app8',
-      data: data
-    })
-    console.log(vm.$data === data)
-    console.log(vm.$el === document.getElementById('app8'))
-    vm.$watch('a', (newVaule, oldValue) => {
-      console.log('watch')
+      data: {
+        a: 1
+      },
+      created() {
+        console.log('a is:' + this.a)
+      }
     })
   </script>
 </html>
