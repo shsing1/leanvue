@@ -7,30 +7,19 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
   <body>
-    <div id="app6">
-      <ol>
-        <todo-item
-          v-for="item in groceryList"
-          :todo="item"
-          :key="item.id">
-        </todo-item>
-      </ol>
+    <div id="app7">
+      <p>{{ foo }}</p>
+      <button @click="foo='baz'">Chang it</button>
     </div>
   </body>
   <script>
-    Vue.component('todo-item', {
-      props: ['todo'],
-      template: '<li>{{ todo.text }}</li>'
-    })
-    var app = new Vue({
-      el: '#app6',
-      data: {
-        groceryList: [
-          {id: 0, text: '蔬菜'},
-          {id: 1, text: '奶酪'},
-          {id: 2, text: '隨便其它平麼人吃的東西'},
-        ]
-      }
+    var obj = {
+      foo: 'bar'
+    }
+    Object.freeze(obj)
+    new Vue({
+      el: '#app7',
+      data: obj
     })
   </script>
 </html>
