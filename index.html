@@ -16,15 +16,11 @@
       el: '#app8',
       data: {
         firstName: 'Foo',
-        lastName: 'Bar',
-        fullName: ''
+        lastName: 'Bar'
       },
-      watch: {
-        firstName(val) {
-          this.fullName = val + ' ' + this.lastName
-        },
-        lastName(val) {
-          this.fullName = this.firstName + ' ' + val
+      computed: {
+        fullName() {
+          return this.firstName + ' ' + this.lastName
         }
       }
     })
