@@ -8,24 +8,23 @@
   </head>
   <body>
     <div id="app8">
-      <p>{{ now }}</p>
-      <p>{{ getnow() }}</p>
+      {{ fullName }}
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app8',
       data: {
-        message: 'Hello'
+        firstName: 'Foo',
+        lastName: 'Bar',
+        fullName: ''
       },
-      computed: {
-        now() {
-          return new Date()
-        }
-      },
-      methods: {
-        getnow() {
-          return new Date()
+      watch: {
+        firstName(val) {
+          this.fullName = val + ' ' + this.lastName
+        },
+        lastName(val) {
+          this.fullName = this.firstName + ' ' + val
         }
       }
     })
