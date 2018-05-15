@@ -10,15 +10,20 @@
   </head>
   <body>
     <div id="app-example">
-      <div :class="[{active: isActive}, errorClass]">div</div>
+      <my-component class="baz boo" :class="{active: isActive}"></my-component>
     </div>
   </body>
   <script>
+    Vue.component(
+      'my-component',
+      {
+        template: '<p class="foo bar">Hi</p>'
+      }
+    )
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        isActive: true,
-        errorClass: 'text-danger'
+        isActive: true
       }
     })
   </script>
