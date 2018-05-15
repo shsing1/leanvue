@@ -10,16 +10,19 @@
   </head>
   <body>
     <div id="app-example">
-      <div :style="styleObject">test</div>
+      <div :style="[baseStyles, overridingStyles]">test</div>
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        styleObject: {
+        baseStyles: {
           color: 'red',
           fontSize: '13px'
+        },
+        overridingStyles: {
+          backgroundColor: 'blue'
         }
       }
     })
