@@ -10,18 +10,19 @@
   </head>
   <body>
     <div id="app-example">
-      <template v-if="ok">
-        <h1>Title</h1>
-        <p>Paragraph 1</p>
-        <p>Paragraph 2</p>
-      </template>
+      <div v-if="show">
+        Now you see me
+      </div>
+      <div v-else>
+        Now you don't
+      </div>
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        ok: true
+        show: Math.random() > 0.5
       }
     })
   </script>
