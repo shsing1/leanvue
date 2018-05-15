@@ -10,11 +10,17 @@
   </head>
   <body>
     <div id="app-example">
-      <div v-if="show">
-        Now you see me
+      <div v-if="type === 'A'">
+        A
+      </div>
+      <div v-else-if="type === 'B'">
+        B
+      </div>
+      <div v-else-if="type === 'C'">
+        C
       </div>
       <div v-else>
-        Now you don't
+        Not A/B/C
       </div>
     </div>
   </body>
@@ -22,7 +28,7 @@
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        show: Math.random() > 0.5
+        type: 'D'
       }
     })
   </script>
