@@ -10,13 +10,14 @@
   </head>
   <body>
     <div id="app-example">
-      <div :class="[activeClass, errorClass]">div</div>
+      <div :class="[isActive ? activeClass : '', errorClass]">div</div>
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
+        isActive: true,
         activeClass: 'active',
         errorClass: 'text-danger'
       }
