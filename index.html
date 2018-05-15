@@ -10,7 +10,7 @@
   </head>
   <body>
     <div id="app-example">
-      <div :class="[isActive ? activeClass : '', errorClass]">div</div>
+      <div :class="[{active: isActive}, errorClass]">div</div>
     </div>
   </body>
   <script>
@@ -18,7 +18,6 @@
       el: '#app-example',
       data: {
         isActive: true,
-        activeClass: 'active',
         errorClass: 'text-danger'
       }
     })
