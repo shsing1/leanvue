@@ -10,20 +10,15 @@
   </head>
   <body>
     <div id="app-example">
-      <div :style="[baseStyles, overridingStyles]">test</div>
+      <h1 v-if="ok">Yes</h1>
+      <h1 v-else>No</h1>
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        baseStyles: {
-          color: 'red',
-          fontSize: '13px'
-        },
-        overridingStyles: {
-          backgroundColor: 'blue'
-        }
+        ok: true
       }
     })
   </script>
