@@ -11,7 +11,10 @@
   <body>
     <div id="app-example">
       <ul>
-        <li v-for="n in 10">{{ n }}</li>
+        <template v-for="item in items">
+          <li>{{ item.msg }}</li>
+          <li class="divider"></li>
+        </template>
       </ul>
     </div>
   </body>
@@ -19,7 +22,12 @@
     var vm  = new Vue({
       el: '#app-example',
       data: {
-
+        items: [
+          {id: 1, msg: 'test 1'},
+          {id: 2, msg: 'test 2'},
+          {id: 3, msg: 'test 3'},
+          {id: 4, msg: 'test 4'},
+        ]
       }
     })
   </script>
