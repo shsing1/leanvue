@@ -10,20 +10,24 @@
   </head>
   <body>
     <div id="app-example">
-      -- {{ items }}
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        items: ['a', 'b', 'c', 'd']
+        userProfile: {
+          name: 'Anika'
+        }
       }
     })
 
-    vm.items[1] = 'z'
-
-    vm.items = vm.items.filter(item=>{return true});
+    Vue.set(vm.userProfile, 'age', 27)
+    vm.$set(vm.userProfile, 'age', 27)
+    vm.userProfile = Object.assign({}, vm.userProfile, {
+      age: 27,
+      favoriteColor: 'Vue Green'
+    })
 
   </script>
 </html>
