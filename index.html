@@ -10,21 +10,14 @@
   </head>
   <body>
     <div id="app-example">
-      <template v-if="loginType === 'username'">
-        <label>Username</label>
-        <input placeholder="Enter your username">
-      </template>
-      <template v-else>
-        <label>Email</label>
-        <input placeholder="Enter your email address" key="email-input">
-      </template>
+      <h1 v-show="ok">Hello</h1>
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        loginType: 'username'
+        ok: true
       }
     })
   </script>
