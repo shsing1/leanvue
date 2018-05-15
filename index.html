@@ -10,15 +10,17 @@
   </head>
   <body>
     <div id="app-example">
-      <div :style="{color: activeColor, fontSize: fontSize + 'px'}">test</div>
+      <div :style="styleObject">test</div>
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        activeColor: 'red',
-        fontSize: 30
+        styleObject: {
+          color: 'red',
+          fontSize: '13px'
+        }
       }
     })
   </script>
