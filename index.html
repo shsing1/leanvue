@@ -10,20 +10,15 @@
   </head>
   <body>
     <div id="app-example">
-      <my-component class="baz boo" :class="{active: isActive}"></my-component>
+      <div :style="{color: activeColor, fontSize: fontSize + 'px'}">test</div>
     </div>
   </body>
   <script>
-    Vue.component(
-      'my-component',
-      {
-        template: '<p class="foo bar">Hi</p>'
-      }
-    )
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        isActive: true
+        activeColor: 'red',
+        fontSize: 30
       }
     })
   </script>
