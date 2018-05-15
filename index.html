@@ -10,23 +10,24 @@
   </head>
   <body>
     <div id="app-example">
+      <ul>
+        <li v-for="n in evenNumbers">{{ n }}</li>
+      </ul>
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        userProfile: {
-          name: 'Anika'
+        numbers: [1, 2, 3, 4, 5]
+      },
+      computed: {
+        evenNumbers: function () {
+          return this.numbers.filter(number => {
+            return number % 2 === 0
+          })
         }
       }
-    })
-
-    Vue.set(vm.userProfile, 'age', 27)
-    vm.$set(vm.userProfile, 'age', 27)
-    vm.userProfile = Object.assign({}, vm.userProfile, {
-      age: 27,
-      favoriteColor: 'Vue Green'
     })
 
   </script>
