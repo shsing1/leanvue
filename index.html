@@ -11,7 +11,7 @@
   <body>
     <div id="app-example">
       <ul>
-        <li v-for="n in even(numbers)">{{ n }}</li>
+        <li v-for="n in 10">{{ n }}</li>
       </ul>
     </div>
   </body>
@@ -19,16 +19,8 @@
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        numbers: [1, 2, 3, 4, 5]
-      },
-      methods: {
-        even: function (numbers) {
-          return numbers.filter(number => {
-            return number % 2 === 0
-          })
-        }
+
       }
     })
-
   </script>
 </html>
