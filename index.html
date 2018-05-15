@@ -10,23 +10,22 @@
   </head>
   <body>
     <div id="app-example">
-      <ul>
-        <li v-for="(value, key, index) in object">
-          {{ index }}. {{ key }}: {{ value }}
-        </li>
-      </ul>
+      -- {{ items }}
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        object: {
-          firstName: 'John',
-          lastName: 'Doe',
-          age: 30
-        }
+        items: ['a', 'b', 'c', 'd']
       }
     })
+
+    // 擇一使用
+    Vue.set(vm.items, 1, 'z')
+    // vm.$set(vm.items, 1, 'z')
+    vm.items.splice(1, 1, 'b')
+
+
   </script>
 </html>
