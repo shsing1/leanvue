@@ -21,11 +21,9 @@
       }
     })
 
-    // 擇一使用
-    Vue.set(vm.items, 1, 'z')
-    // vm.$set(vm.items, 1, 'z')
-    vm.items.splice(1, 1, 'b')
+    vm.items[1] = 'z'
 
+    vm.items = vm.items.filter(item=>{return true});
 
   </script>
 </html>
