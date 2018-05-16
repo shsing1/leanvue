@@ -10,15 +10,22 @@
   </head>
   <body>
     <div id="app-example">
-      <button @click="counter += 1">Add 1</button>
-      <p>The button above has clicked {{ counter }} times.</p>
+      <button @click="greet">Add 1</button>
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        counter: 0
+        name: 'Vue.js'
+      },
+      methods: {
+        greet: function (event) {
+          alert('Hello ' + this.name + '!')
+          if (event) {
+            alert(event.target.tagName)
+          }
+        }
       }
     })
   </script>
