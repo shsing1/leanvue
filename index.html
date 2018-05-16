@@ -10,11 +10,10 @@
   </head>
   <body>
     <div id="app-example">
-      <select v-model="selected" multiple style="width: 50px">
-        <option disabled value="">請選擇</option>
-        <option>A</option>
-        <option>B</option>
-        <option>C</option>
+      <select v-model="selected">
+        <option v-for="option in options" :value="option.value">
+          {{ option.text }}
+        </option>
       </select>
       <span>Selected: {{ selected }}</span>
     </div>
@@ -23,7 +22,12 @@
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        selected: []
+        selected: 'A',
+        options: [
+          {text: 'One', value: 'A'},
+          {text: 'Two', value: 'B'},
+          {text: 'Three', value: 'C'},
+        ]
       }
     })
   </script>
