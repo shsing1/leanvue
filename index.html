@@ -10,14 +10,15 @@
   </head>
   <body>
     <div id="app-example">
-      <input type="checkbox" v-model="toggle" true-value="yes" false-value="no">
+      <input type="radio" v-model="pick" :value="a">
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        toggle: 'yes'
+        pick: '',
+        a: 'a'
       }
     })
   </script>
