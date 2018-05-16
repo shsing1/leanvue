@@ -10,22 +10,26 @@
   </head>
   <body>
     <div id="app-example">
-      <blog-post v-for="post in posts" :title="post.title" :key="post.id"></blog-post>
+      <blog-post v-for="post in posts" :title="post.title" :content="post.content" :key="post.id"></blog-post>
     </div>
   </body>
   <script>
     Vue.component('blog-post', {
-      props: ['title'],
-      template: '<h3>{{ title }}</h3>'
-
+      props: ['title', 'content'],
+      template: `
+      <div class="blog-post">
+        <h3>{{ title }}</h3>
+        <div v-html="content"></div>
+      </div>
+      `
     })
     var vm  = new Vue({
       el: '#app-example',
       data: {
         posts: [
-          { id: 1, title: 'My joruney with Vue'},
-          { id: 2, title: 'Blogging with Vue' },
-          { id: 3, title: 'Why Vue is so fun' },
+          { id: 1, title: 'My joruney with Vue', content: 'id:1 content'},
+          { id: 2, title: 'Blogging with Vue', content: 'id:3 content' },
+          { id: 3, title: 'Why Vue is so fun', content: 'id:3 content' },
         ]
       }
     })
