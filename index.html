@@ -10,41 +10,23 @@
   </head>
   <body>
     <div id="app-example">
-      <div :style="{fontSize: postfontSize + 'em'}">
-        <blog-post
-          v-for="post in posts"
-          :post="post"
-          :key="post.id"
-          @enlarge-text="onEnlargeText"
-        ></blog-post>
-      </div>
+      <custom-input :value="searchText" @input="searchText=$event"></custom-input>
     </div>
   </body>
   <script>
-    Vue.component('blog-post', {
-      props: ['post'],
+    Vue.component('custom-input', {
+      props: ['value'],
       template: `
-      <div class="blog-post">
-      <h3>{{ post.title }}</h3>
-      <button @click="$emit('enlarge-text', 0.1)">Enlarge text</button>
-      <div v-html="post.content"></div>
-      </div>
+      <input
+        :value="value"
+        @input="$emit('input', $event.target.value)"
+      >
       `
     })
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        posts: [
-          { id: 1, title: 'My joruney with Vue', content: 'id:1 content'},
-          { id: 2, title: 'Blogging with Vue', content: 'id:3 content' },
-          { id: 3, title: 'Why Vue is so fun', content: 'id:3 content' },
-        ],
-        postfontSize: 1
-      },
-      methods: {
-        onEnlargeText: function (enlargeAmount) {
-          this.postfontSize += enlargeAmount
-        }
+        searchText: ''
       }
     })
   </script>
