@@ -10,21 +10,35 @@
   </head>
   <body>
     <div id="app-example">
-      <alert-box>Something bad happened</alert-box>
+      <base-input
+        :label="label"
+        v-model="username"
+        class="username-input"
+        class="username-input"
+        placeholder="Enter your username"
+      ></base-input>
     </div>
   </body>
   <script>
-    Vue.component('alert-box', {
+    Vue.component('base-input', {
+      inheritAttrs: false,
+      props: ['label', 'value'],
       template: `
-      <div class="demo-alert-box">
-        <strong>Error!</strong>
-        <slot></slot>
-      </div>
+        <label>
+          {{ label }}
+          <input
+            v-bind="$attrs"
+            v-bind:value="value"
+            v-on:input="$emit('input', $event.target.value)"
+          >
+        </label>
       `
     })
     var vm  = new Vue({
       el: '#app-example',
       data: {
+        label: 'test',
+        username: ''
       }
     })
   </script>
