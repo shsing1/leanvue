@@ -10,41 +10,15 @@
   </head>
   <body>
     <div id="app-example">
-      <!-- 阻止單擊事件繼續傳播 -->
-      <a @click.stop="doThis"></a>
-
-      <!-- 提交事件不再重載頁面 -->
-      <form @submit.prevent="onSubmit"></form>
-
-      <!-- 修飾符可以串聯 -->
-      <a @click.stop.prevent="doThat"></a>
-
-      <!-- 只有修飾符 -->
-      <form @submit.prevent></form>
-
-      <!-- 添加事件監聽器時使用事件捕獲模式 -->
-      <!-- 即元素自身觸發的事件先在此處處理，然後才交由內部元素進行處理 -->
-      <div @click.capture=""doThis/></div>
-
-      <!-- 只當在 event.target 是當前元素自身時觸發處理函數 -->
-      <!-- 即事件不是行內部元素觸發的 -->
-      <div @click.self="doThat"></div>
-
-      <!-- 點擊事件將只會觸發一次 -->
-      <a @click.once="doThis"></a>
-
-      <!-- 滾動事件的默認行為 (即滾動行為) 將會立即觸發 -->
-      <!-- 而不會等待 `onScroll` 完成 -->
-      <!-- 這其中包含 `event.preventDefault` 的情況 -->
-      <div @scroll.passive>...</div>
+      <input v-model="message" placeholder="edit me">
+      <p>Message is: {{ message }}</p>
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-      },
-      methods: {
+        message: ''
       }
     })
   </script>
