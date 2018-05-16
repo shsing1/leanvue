@@ -10,23 +10,21 @@
   </head>
   <body>
     <div id="app-example">
-      <custom-input :value="searchText" @input="searchText=$event"></custom-input>
+      <alert-box>Something bad happened</alert-box>
     </div>
   </body>
   <script>
-    Vue.component('custom-input', {
-      props: ['value'],
+    Vue.component('alert-box', {
       template: `
-      <input
-        :value="value"
-        @input="$emit('input', $event.target.value)"
-      >
+      <div class="demo-alert-box">
+        <strong>Error!</strong>
+        <slot></slot>
+      </div>
       `
     })
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        searchText: ''
       }
     })
   </script>
