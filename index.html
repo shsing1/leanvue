@@ -10,15 +10,15 @@
   </head>
   <body>
     <div id="app-example">
-      <input v-model.number="age" type="number">
-      <p>age: {{ age }}</p>
+      <input v-model.trim="msg">
+      <p>msg: {{ msg }}</p>
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        age: ''
+        msg: ''
       }
     })
   </script>
