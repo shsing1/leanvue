@@ -10,19 +10,20 @@
   </head>
   <body>
     <div id="app-example">
-      <input type="radio" id="one" value="one" v-model="picked">
-      <label for="one">one</label>
-      <input type="radio" id="two" value="two" v-model="picked">
-      <label for="two">two</label>
-      <br>
-      <span>Picked: {{ picked}}</span>
+      <select v-model="selected">
+        <option disabled value="">請選擇</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <span>Selected: {{ selected }}</span>
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        picked: []
+        selected: []
       }
     })
   </script>
