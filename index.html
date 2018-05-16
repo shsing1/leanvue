@@ -10,8 +10,9 @@
   </head>
   <body>
     <div id="app-example">
-      <input v-model="message" placeholder="edit me">
-      <p>Message is: {{ message }}</p>
+      <span>Multiline message is:</span>
+      <p tyle="white-space: pre-line">{{ message }}</p>
+      <textarea v-model="message" placeholder="add multiple lines"></textarea>
     </div>
   </body>
   <script>
