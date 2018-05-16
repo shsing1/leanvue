@@ -10,16 +10,15 @@
   </head>
   <body>
     <div id="app-example">
-      <select v-model="selected">
-        <option :value="{ number: 123}">123</option>
-      </select>
+      <input v-model.lazy="msg">
+      <p>Msg: {{ msg }}</p>
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        selected: ''
+        msg: ''
       }
     })
   </script>
