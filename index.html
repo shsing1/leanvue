@@ -10,22 +10,33 @@
   </head>
   <body>
     <div id="app-example">
-      <button @click="warn('Form cannot be submitted yet.', $event)">Submmit</button>
+      <!-- 阻止單擊事件繼續傳播 -->
+      <a @click.stop="doThis"></a>
+
+      <!-- 提交事件不再重載頁面 -->
+      <form @submit.prevent="onSubmit"></form>
+
+      <!-- 修飾符可以串聯 -->
+      <a @click.stop.prevent="doThat"></a>
+
+      <!-- 只有修飾符 -->
+      <form @submit.prevent></form>
+
+      <!-- 添加事件監聽器時使用事件捕獲模式 -->
+      <!-- 即元素自身觸發的事件先在此處處理，然後才交由內部元素進行處理 -->
+      <div @click.capture=""doThis/></div>
+
+      <!-- 只當在 event.target 是當前元素自身時觸發處理函數 -->
+      <!-- 即事件不是行內部元素觸發的 -->
+      <div @click.self="doThat"></div>
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        name: 'Vue.js'
       },
       methods: {
-        warn: function (message, event) {
-          if (event) {
-            event.preventDefault()
-          }
-          alert(message)
-        }
       }
     })
   </script>
