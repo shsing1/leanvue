@@ -10,24 +10,23 @@
   </head>
   <body>
     <div id="app-example">
-      <button-counter></button-counter>
-      <button-counter></button-counter>
-      <button-counter></button-counter>
+      <blog-post v-for="post in posts" :title="post.title" :key="post.id"></blog-post>
     </div>
   </body>
   <script>
-    Vue.component('button-counter', {
-      data: function () {
-        return {
-          count: 0
-        }
-      },
-      template: '<button @click="count++">You clicked me {{ count }} times.</button>'
+    Vue.component('blog-post', {
+      props: ['title'],
+      template: '<h3>{{ title }}</h3>'
+
     })
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        msg: ''
+        posts: [
+          { id: 1, title: 'My joruney with Vue'},
+          { id: 2, title: 'Blogging with Vue' },
+          { id: 3, title: 'Why Vue is so fun' },
+        ]
       }
     })
   </script>
