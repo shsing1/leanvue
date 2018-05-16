@@ -10,11 +10,18 @@
   </head>
   <body>
     <div id="app-example">
-      <input v-model.trim="msg">
-      <p>msg: {{ msg }}</p>
+      <button-counter></button-counter>
     </div>
   </body>
   <script>
+    Vue.component('button-counter', {
+      data: function () {
+        return {
+          count: 0
+        }
+      },
+      template: '<button @click="count++">You clicked me {{ count }} times.</button>'
+    })
     var vm  = new Vue({
       el: '#app-example',
       data: {
