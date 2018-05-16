@@ -10,24 +10,14 @@
   </head>
   <body>
     <div id="app-example">
-      <select v-model="selected">
-        <option v-for="option in options" :value="option.value">
-          {{ option.text }}
-        </option>
-      </select>
-      <span>Selected: {{ selected }}</span>
+      <input type="checkbox" v-model="toggle" true-value="yes" false-value="no">
     </div>
   </body>
   <script>
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        selected: 'A',
-        options: [
-          {text: 'One', value: 'A'},
-          {text: 'Two', value: 'B'},
-          {text: 'Three', value: 'C'},
-        ]
+        toggle: 'yes'
       }
     })
   </script>
