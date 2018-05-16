@@ -10,7 +10,7 @@
   </head>
   <body>
     <div id="app-example">
-      <button @click="greet">Add 1</button>
+      <button @click="warn('Form cannot be submitted yet.', $event)">Submmit</button>
     </div>
   </body>
   <script>
@@ -20,11 +20,11 @@
         name: 'Vue.js'
       },
       methods: {
-        greet: function (event) {
-          alert('Hello ' + this.name + '!')
+        warn: function (message, event) {
           if (event) {
-            alert(event.target.tagName)
+            event.preventDefault()
           }
+          alert(message)
         }
       }
     })
