@@ -10,24 +10,23 @@
   </head>
   <body>
     <div id="app-example">
-      <base-checkbox v-model="lovingVue"></base-checkbox>
+      <navigation-link url="/profile">
+        Your Profile
+      </navigation-link>
     </div>
   </body>
   <script>
-    Vue.component('base-checkbox', {
-      model: {
-        prop: 'checked',
-        event: 'change'
-      },
+    Vue.component('navigation-link', {
       props: {
-        checked: Boolean
+        url: String
       },
       template: `
-        <input
-          type="checkbox"
-          v-bind:checked="checked"
-          v-on:change="$emit('change', $event.target.checked)"
+        <a
+          :href="url"
+          class="nav-link"
         >
+          <slot></slot>
+        </a>
       `
     })
     var vm  = new Vue({
