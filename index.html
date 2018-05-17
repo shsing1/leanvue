@@ -10,31 +10,20 @@
   </head>
   <body>
     <div id="app-example">
-      <navigation-link url="/profile">
-        <h1 slot="header">Here might be a page title</h1>
-        <p>Aparagraph for the main content.</p>
-        <p>And another one.</p>
-        <p slot="footer">Hrer's some contact info</p>
-      </navigation-link>
+      <button-input>
+        mysubmit
+      </button-input>
     </div>
   </body>
   <script>
-    Vue.component('navigation-link', {
+    Vue.component('button-input', {
       props: {
         url: String
       },
       template: `
-        <div class="container">
-          <header>
-            <slot name="header"></slot>
-          </header>
-          <main>
-            <slot></slot>
-          </main>
-          <footer>
-            <slot name="footer"></slot>
-          </footer>
-        </div>
+      <button>
+        <slot>Submit</slot>
+      </button>
       `
     })
     var vm  = new Vue({
