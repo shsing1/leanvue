@@ -11,8 +11,14 @@
   <body>
     <div id="app-example">
       <navigation-link url="/profile">
-        <span class="fa fa-user">test</span>
-        Your Profile
+        <template slot="header">
+          <h1>Here might be a page title</h1>
+        </template>
+        <p>Aparagraph for the main content.</p>
+        <p>And another one.</p>
+        <template slot="footer">
+          <p>Hrer's some contact info</p>
+        </template>
       </navigation-link>
     </div>
   </body>
@@ -22,12 +28,17 @@
         url: String
       },
       template: `
-        <a
-          :href="url"
-          class="nav-link"
-        >
-          <slot></slot>
-        </a>
+        <div class="container">
+          <header>
+            <slot name="header"></slot>
+          </header>
+          <main>
+            <slot></slot>
+          </main>
+          <footer>
+            <slot name="footer"></slot>
+          </footer>
+        </div>
       `
     })
     var vm  = new Vue({
