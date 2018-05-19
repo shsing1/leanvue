@@ -10,16 +10,15 @@
   </head>
   <body>
     <div id="app-example">
-      <my-component inline-template>
-          <div>
-            <p>These are compiled as the component's own template.</p>
-            <p>Not parent's transclusion content.</p>
-          </div>
-      </my-component>
+      <my-component></my-component>
     </div>
+    <script type="text/x-template" id="hello-word-template">
+      <p>Hello word template</p>
+    </script>
   </body>
   <script>
   Vue.component('my-component', {
+    template: '#hello-word-template'
   })
   new Vue({ 
     el: '#app-example',
