@@ -10,21 +10,16 @@
   </head>
   <body>
     <div id="app-example">
-      <button-input>
-        mysubmit
-      </button-input>
+      <async-example></async-example>
     </div>
   </body>
   <script>
-    Vue.component('button-input', {
-      props: {
-        url: String
-      },
-      template: `
-      <button>
-        <slot>Submit</slot>
-      </button>
-      `
+    Vue.component('async-example', function (resolve, reject) {
+      setTimeout(function () {
+        resolve({
+          template: `<div>I am async!</div>`
+        })
+      })
     })
     var vm  = new Vue({
       el: '#app-example',
