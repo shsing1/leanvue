@@ -10,44 +10,20 @@
   </head>
   <body>
     <div id="app-example">
-      <tree-folder :folder="folder"></tree-folder>
+      <my-component inline-template>
+          <div>
+            <p>These are compiled as the component's own template.</p>
+            <p>Not parent's transclusion content.</p>
+          </div>
+      </my-component>
     </div>
   </body>
   <script>
-  Vue.component('tree-folder', {
-    props: ['folder'],
-    template: `
-    <p>
-      <span>{{ folder.name }}</span>
-      <tree-folder-contents :children="folder.children"/>
-    </p>
-    `
-  })
-  Vue.component('tree-folder-contents', {
-    props:['children'],
-    template: `
-    <ul>
-      <li v-for="child in children">
-        <tree-folder v-if="child.children" :folder="child"/>
-        <span v-else>{{ child.name }}</span>
-      </li>
-    </ul>
-    `
+  Vue.component('my-component', {
   })
   new Vue({ 
     el: '#app-example',
     data: {
-      folder: {
-        name: 'folder1', children: [
-          {name: 'sub-folder1', children: [
-            {name: 'two-folder1'}
-          ]},
-          {name: 'sub-folder2'},
-          {name: 'sub-folder3', children: [
-            {name: 'two-folder3'}
-          ]},
-        ]
-      }
     }
   })
   </script>
