@@ -4,47 +4,97 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>leanvue</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <style>
+    .map { 
+      width: 100%;
+      height: 400px;
+    }
+    </style>
   </head>
   <body>
     <div id="app-example">
-      <base-input ref="usernameInput"></base-input>
-      <input ref="emailInput">
+      <google-map>
+        <google-map-marker v-bind:places="vueConfCities"></google-map-marker>
+      </google-map>
     </div>
   </body>
   <script>
-    Vue.component('base-input', {
-      data: function () {
-        return {
-
-        }
-      },
-      mounted: function () {
-      },
-      template: `<div>this.$refs test</div>`
-    })
-    var vm  = new Vue({
-      el: '#app-example',
-      data: {
-        foo: 1
-      },
-      mounted: function () {
-        console.log(this.$refs)
-        this.$refs.emailInput.focus()
-        this.$refs.emailInput.value = 'test'
-      },
-      computed: {
-        bar: function () {
-          return 2
-        }
-      },
-      methods: {
-        baz: function () {
-          alert(3)
-        }
+  Vue.component('google-map', {
+    provide: function () {
+      return {
+        getMap: this.getMap
       }
-    })
+    },
+    data: function () {
+      return {
+        map: null
+      }
+    },
+    mounted: function () {
+      this.map = new google.maps.Map(this.$el, { 
+        center: { lat: 0, lng: 0 },
+        zoom: 1
+      })
+    },
+    methods: {
+      getMap: function (found) {
+        var vm = this
+        function checkForMap () {
+          if (vm.map) {
+            found(vm.map)
+          } else {
+            setTimeout(checkForMap, 50)
+          }
+        }
+        checkForMap()
+      }
+    },
+    template: '<div class="map"><slot></slot></div>'
+  })
+
+  Vue.component('google-map-marker', {
+    inject: ['getMap'],
+    props: ['places'],
+    created: function () {
+      var vm = this
+      vm.getMap(function (map) {
+        vm.places.forEach(function (place) {
+          new google.maps.Marker({
+            position: place.position,
+            map: map
+          })
+        })
+      })
+    },
+    render (h) {
+      return null
+    }
+  })
+
+  new Vue({ 
+    el: '#app-example',
+    data: {
+      vueConfCities: [
+        {
+          name: 'Wrocław',
+          position: {
+            lat: 51.107885,
+            lng: 17.038538
+          }
+        },
+        {
+          name: 'New Orleans',
+          position: {
+            lat: 29.951066,
+            lng: -90.071532
+          }
+        }
+      ]
+    }
+  })
   </script>
 </html>
