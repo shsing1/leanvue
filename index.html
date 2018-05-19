@@ -12,8 +12,9 @@
   <body>
     <div id="app-example">
       <transition>
-        <button v-if="isEditing" key="save">Save</button>
-        <button v-else key="edit">Edit</button>
+        <button :key="isEditing">
+          {{ isEditing ? 'Save' : 'Edit' }}
+        </button>
       </transition>
     </div>
   </body>
