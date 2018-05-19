@@ -4,37 +4,49 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>leanvue</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
   </head>
   <body>
     <div id="app-example">
-      <input ref="test1">
-      <input ref="test2">
+      <tree-folder :folder="folder"></tree-folder>
     </div>
   </body>
   <script>
+  Vue.component('tree-folder', {
+    props: ['folder'],
+    template: `
+    <p>
+      <span>{{ folder.name }}</span>
+      <tree-folder-contents :children="folder.children"/>
+    </p>
+    `
+  })
+  Vue.component('tree-folder-contents', {
+    props:['children'],
+    template: `
+    <ul>
+      <li v-for="child in children">
+        <tree-folder v-if="child.children" :folder="child"/>
+        <span v-else>{{ child.name }}</span>
+      </li>
+    </ul>
+    `
+  })
   new Vue({ 
     el: '#app-example',
     data: {
-    },
-    mounted: function () {
-      this.attachDatepicker('test1')
-      this.attachDatepicker('test2')
-    },
-    methods: {
-      attachDatepicker: function (refName) {
-        var pick = new Pikaday({
-          field: this.$refs[refName],
-          format: 'YY-MM-DD'
-        })
-
-        this.$once('hook:beforeDestroy', function () {
-          pick.destroy()
-        })
+      folder: {
+        name: 'folder1', children: [
+          {name: 'sub-folder1', children: [
+            {name: 'two-folder1'}
+          ]},
+          {name: 'sub-folder2'},
+          {name: 'sub-folder3', children: [
+            {name: 'two-folder3'}
+          ]},
+        ]
       }
     }
   })
