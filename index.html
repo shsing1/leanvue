@@ -10,25 +10,30 @@
   </head>
   <body>
     <div id="app-example">
-      <root-example></root-example>
+      <base-input ref="usernameInput"></base-input>
+      <input ref="emailInput">
     </div>
   </body>
   <script>
-    Vue.component('root-example', {
+    Vue.component('base-input', {
       data: function () {
         return {
 
         }
       },
       mounted: function () {
-        console.log(this.$root)
       },
-      template: `<div>this.$root test</div>`
+      template: `<div>this.$refs test</div>`
     })
     var vm  = new Vue({
       el: '#app-example',
       data: {
         foo: 1
+      },
+      mounted: function () {
+        console.log(this.$refs)
+        this.$refs.emailInput.focus()
+        this.$refs.emailInput.value = 'test'
       },
       computed: {
         bar: function () {
