@@ -7,17 +7,18 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
   </head>
   <body>
     <div id="app-example">
-      <button @click="show=!show">Toggle render</button>
+      <button @click="show=!show">Toggle</button>
       <transition 
-        name="custom-classes-transition"
-        enter-active-class="animated tada"
-        leave-active-class="animated bounceOutRight"
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @leave="leave"
+        :class="false"
       >
-        <p v-if="show">Hello</p>
+        <p v-if="show">Demo</p>
       </transition>
     </div>
   </body>
@@ -25,7 +26,27 @@
   new Vue({ 
     el: '#app-example',
     data: {
-      show: true
+      show: false
+    },
+    methods: {
+      beforeEnter: function (el) {
+        el.style.opacity = 0
+        el.style.transformOrigin = 'left'
+      },
+      enter: function(el, done) {
+        Velocity(el, {opacity: 1, fontSize: '1.4em'}, {duration: 300})
+        Velocity(el, {fontSize: '1em'}, {complete: done})
+      },
+      leave: function (el, done) {
+        Velocity(el, {translateX: '15px', rotateZ: '50deg'}, {duration: 600})
+        Velocity(el, {rotateZ: '100deg'}, {loop: 2})
+        Velocity(el, {
+          rotateZ: '45deg',
+          translateY: '30px',
+          translateX: '30px',
+          opacity: 0
+        }, {complete: done})
+      }
     }
   })
   </script>
