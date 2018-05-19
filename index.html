@@ -12,8 +12,8 @@
   <body>
     <div id="app-example">
       <transition>
-        <button :key="isEditing">
-          {{ isEditing ? 'Save' : 'Edit' }}
+        <button :key="docState">
+          {{ buttonMessage }}
         </button>
       </transition>
     </div>
@@ -22,10 +22,16 @@
   var vm = new Vue({ 
     el: '#app-example',
     data: {
-      isEditing: false
+      docState: 'saved'
     },
-    methods: {
-      
+    computed: {
+      buttonMessage: function () {
+        switch (this.docState) {
+          case 'saved': return 'Edit'
+          case 'edited': return 'Save'
+          case 'editing': return 'Cancel'
+        }
+      }
     }
   })
   </script>
