@@ -14,28 +14,29 @@
   </head>
   <body>
     <div id="app-example">
-      <input v-model="query">
-      <transition-group 
-        name="staggered-fade" 
-        tag="ul"
-        :class="false"
-        @before-enter="beforeEnter"
-        @enter="enter"
-        @leave="leave"
-      >
-        <li 
-          v-for="(item, index) in computedList"
-          :key="item.msg"
-          :data-index="index"
-        >{{ item.msg }}</li>
-      </transition-group>
+        Fade In: <input type="range" v-model="fadeInDuration" min="0" :max="maxFadeDuration">
+        Fade Out: <input type="range" v-model="fadeOutDuration" min="0" :max="maxFadeDuration">
+        <transition
+          :class="false"
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @leave="leave"
+        >
+          <p v-if="show">Hello</p>
+        </transition>
+        <button v-if="stop" @click="stop=false, show=false">Start Animation</button>
+        <button v-else @click="stop=true">Stop</button>
     </div>
   </body>
   <script>
   var vm = new Vue({ 
     el: '#app-example',
     data: {
-      query: '',
+      fadeInDuration: 1000,
+      fadeOutDuration: 1000,
+      maxFadeDuration: 1500,
+      stop: true,
+      show: true,
       list: [
         { msg: 'Bruce Lee' },
         { msg: 'Jackie Chan' },
@@ -55,29 +56,38 @@
     methods: {
       beforeEnter: function (el) {
         el.style.opacity = 0
-        el.style.height = 0
       },
       enter: function (el, done) {
-        var delay = el.dataset.index * 150
+        var vm = this
 
-        setTimeout(function () {
-          Velocity(
-            el,
-            {opacity: 1, height: '1.6em'},
-            {complete: done}
-          )
-        }, delay)
+        Velocity(
+          el,
+          {opacity: 1},
+          {
+            duration: vm.fadeInDuration,
+            complete: function () {
+              done
+              if (!vm.stop) {
+                vm.show = false;
+              }
+            }
+          }
+        )
       },
       leave: function (el, done) {
-        var delay = el.dataset.index * 150
+        var vm = this;
 
-        setTimeout(function () {
-          Velocity(
-            el,
-            {opacity: 0, height: 0},
-            {complete: done}
-          )
-        }, delay)
+        Velocity(
+          el,
+          {opacity: 0},
+          {
+            duration: vm.fadeOutDuration,
+            complete: function () {
+              done
+              vm.show = true;
+            }
+          }
+        )
       }
     }
   })
