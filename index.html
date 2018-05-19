@@ -8,19 +8,23 @@
     <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
     <style>
-    .fade-enter-active, .fade-leave-active {
-      transition: opacity .5s;
+    .component-fade-enter-active, .component-fade-leave-active {
+      transition: opacity .3s ease;
     }
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    .component-fade-enter, .component-fade-leave-to
+    /* .component-fade-leave-active for below version 2.1.8 */ {
       opacity: 0;
     }
     </style>
   </head>
   <body>
     <div id="app-example">
-      <transition name="fade" mode="out-in">
-        <button v-if="status" @click="status=!status" key="on">On</button>
-        <button v-else @click="status=!status" key="off">Off</button>
+      <input type="radio" @click="view='v-a'" id="A" value="A" v-model="current">
+      <label for="A">A</label>
+      <input type="radio" @click="view='v-b'" id="B" value="B" v-model="current">
+      <label for="B">B</label>
+      <transition name="component-fade" mode="out-in">
+        <component :is="view"></component>
       </transition>
     </div>
   </body>
@@ -28,9 +32,16 @@
   var vm = new Vue({ 
     el: '#app-example',
     data: {
-      status: true
+      view: 'v-a',
+      current: 'A'
     },
-    computed: {
+    components: {
+      'v-a': {
+        template: `<div>component A</div>`
+      },
+      'v-b': {
+        template: `<div>component B</div>`
+      }
     }
   })
   </script>
