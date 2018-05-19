@@ -10,21 +10,35 @@
   </head>
   <body>
     <div id="app-example">
-      <async-example></async-example>
+      <root-example></root-example>
     </div>
   </body>
   <script>
-    Vue.component('async-example', function (resolve, reject) {
-      setTimeout(function () {
-        resolve({
-          template: `<div>I am async!</div>`
-        })
-      })
+    Vue.component('root-example', {
+      data: function () {
+        return {
+
+        }
+      },
+      mounted: function () {
+        console.log(this.$root)
+      },
+      template: `<div>this.$root test</div>`
     })
     var vm  = new Vue({
       el: '#app-example',
       data: {
-        lovingVue: false
+        foo: 1
+      },
+      computed: {
+        bar: function () {
+          return 2
+        }
+      },
+      methods: {
+        baz: function () {
+          alert(3)
+        }
       }
     })
   </script>
