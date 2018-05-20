@@ -24,6 +24,9 @@
         message: 'Hello ',
         foo: 'abc'
       }
+    },
+    created: function () {
+      console.log('混入的對象被調用')
     }
   }
 
@@ -35,7 +38,7 @@
       bar: 'def'
     },
     created: function () {
-      console.log(this.$data)
+      console.log('組件的鉤子被調用')
     },
     computed: {
     },
