@@ -19,11 +19,7 @@
     </div>
   </body>
   <script>
-  Vue.directive('focus', {
-    inserted: function (el) {
-      el.focus()
-    }
-  })
+
   var vm = new Vue({ 
     el: '#app-example',
     myOption: '全局混入',
@@ -38,6 +34,13 @@
     methods: {
     },
     components: {
+    },
+    directives: {
+      focus: {
+        inserted: function (el) {
+          el.focus()
+        }
+      }
     }
   })
   </script>
