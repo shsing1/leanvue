@@ -8,33 +8,77 @@
     <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/color-js@1.0.3"></script>
     <style>
-    
+    .color-preview {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+    }
     </style>
   </head>
   <body>
     <div id="app-example">
-        <input type="number" v-model.number="number" step="20">
-        <p>{{ animatedNumber }}</p>
+        <input 
+          v-model="colorQuery"
+          @keyup.enter="updateColor"
+          placeholder="Enter a color"
+        >
+        <button @click="updateColor">Update</button>
+        <p>Preview</p>
+        <span
+          :style="{backgroundColor: tweenedCssColor}"
+          class="color-preview"
+        ></span>
+        <p>{{ tweenedCssColor }}</p>
     </div>
   </body>
   <script>
+  var Color = net.brehaut.Color
   var vm = new Vue({ 
     el: '#app-example',
     data: {
-      number: 0,
-      tweenedNumber: 0
+      colorQuery: '',
+      color: {
+        red: 0,
+        green: 0,
+        blue: 0,
+        alpha: 1
+      },
+      tweenedColor: {}
+    },
+    created: function () {
+      this.tweenedColor = Object.assign({}, this.color)
     },
     computed: {
-      animatedNumber: function () {
-        return this.tweenedNumber.toFixed(0)
+      tweenedCssColor: function () {
+        return new Color({
+          red: this.tweenedColor.red,
+          green: this.tweenedColor.green,
+          blue: this.tweenedColor.blue,
+          alpha: this.tweenedColor.alpha,
+        }).toCSS()
       }
     },
     watch: {
-      number: function (newValue) {
-        console.log(this.$data)
-        TweenLite.to(this.$data, 0.5, {tweenedNumber: newValue})
+      color: function () {
+        function animate () {
+          if (TWEEN.update()) {
+            requestAnimationFrame(animate)
+          }
+        }
+        new TWEEN.Tween(this.tweenedColor)
+          .to(this.color, 750)
+          .start()
+        animate()
+        
+      }
+    },
+    methods: {
+      updateColor: function () {
+        this.color = new Color(this.colorQuery).toRGB()
+        this.colorQuery = ''
       }
     }
   })
