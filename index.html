@@ -20,13 +20,17 @@
   <script>
   var myMixin = {
     data: function () {
-      return {
-        message: 'Hello ',
-        foo: 'abc'
-      }
     },
     created: function () {
       console.log('混入的對象被調用')
+    },
+    methods: {
+      foo: function () {
+        console.log('foo')
+      },
+      conflicting: function () {
+        console.log('from mixin')
+      }
     }
   }
 
@@ -34,8 +38,6 @@
     el: '#app-example',
     mixins: [myMixin],
     data: {
-      message: 'goodbye',
-      bar: 'def'
     },
     created: function () {
       console.log('組件的鉤子被調用')
@@ -45,6 +47,12 @@
     watch: {
     },
     methods: {
+      bar: function () {
+        console.log('bar')
+      },
+      conflicting: function () {
+        console.log('from self')
+      }
     },
     components: {
     }
