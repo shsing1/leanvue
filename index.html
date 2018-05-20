@@ -19,24 +19,23 @@
   </body>
   <script>
   var myMixin = {
-    created: function () {
-      this.hello()
-    }, 
-    methods: {
-      hello: function () {
-        console.log('Hello from Mixin!')
+    data: function () {
+      return {
+        message: 'Hello ',
+        foo: 'abc'
       }
     }
   }
-  var Component = Vue.extend({
-    mixins: [myMixin],
-  }) 
-  var component = new Component()
+
   var vm = new Vue({ 
     el: '#app-example',
+    mixins: [myMixin],
     data: {
+      message: 'goodbye',
+      bar: 'def'
     },
     created: function () {
+      console.log(this.$data)
     },
     computed: {
     },
