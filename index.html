@@ -15,20 +15,30 @@
   </head>
   <body>
     <div id="app-example">
-      <div v-demo="{color: 'white', text: 'hello!'}"></div>
+       <anchored-heading :level="level">Hello world!</anchored-heading>
     </div>
   </body>
   <script>
-    Vue.directive('demo', (el, binding) => {
-      console.log(binding.value.color)
-      console.log(binding.value.text)
+    Vue.component('anchored-heading', {
+      render: function (createElement) {
+        return createElement(
+          'h' + this.level,
+          this.$slots.default
+        )
+      },
+      props: {
+        level: {
+          type: Number,
+          required: true
+        }
+      }
     })
 
   var vm = new Vue({ 
     el: '#app-example',
     myOption: '全局混入',
     data: {
-      color: 'red'
+      level: 1
     },
     created: function () {
     },
