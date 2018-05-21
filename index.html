@@ -15,12 +15,13 @@
   </head>
   <body>
     <div id="app-example">
-      <div id="hook-arguments-example" v-color-swatch="color">demo</div>
+      <div v-demo="{color: 'white', text: 'hello!'}"></div>
     </div>
   </body>
   <script>
-    Vue.directive('color-swatch', (el, binding) => {
-      el.style.backgroundColor = binding.value
+    Vue.directive('demo', (el, binding) => {
+      console.log(binding.value.color)
+      console.log(binding.value.text)
     })
 
   var vm = new Vue({ 
