@@ -15,7 +15,7 @@
   </head>
   <body>
     <div id="app-example">
-      <demo-template :items="items">Hello world!</demo-template>
+      <demo-template v-model="value">Hello world!</demo-template>
     </div>
   </body>
   <script>
@@ -23,28 +23,26 @@
 
     Vue.component('demo-template', {
       render: function (h) {
-        if (this.items.length) {
-          return h('ul', this.items.map(item => {
-            return h('li', item.name)
-          }))
-        } else {
-          return h('p', 'No items found.')
-        }
+        var self = this
+        return h('input', {
+          domProps: {
+            value: self.value
+          },
+          on: {
+            input() {
+              self.$emit('input', event.target.value)
+            }
+          }
+        })
       },
-      props: ['items']
+      props: ['value']
     })
 
   var vm = new Vue({
     el: '#app-example',
     myOption: '全局混入',
     data: {
-      items:[
-        {id: 1, name: 'name 1'},
-        {id: 2, name: 'name 2'},
-        {id: 3, name: 'name 3'},
-        {id: 4, name: 'name 4'},
-        {id: 5, name: 'name 5'},
-      ]
+      value: 'test',
     },
     created: function () {
     },
