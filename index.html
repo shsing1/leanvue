@@ -15,33 +15,36 @@
   </head>
   <body>
     <div id="app-example">
-      <anchored-heading :level="level">Hello world!</anchored-heading>
+      <demo-template :items="items">Hello world!</demo-template>
     </div>
   </body>
   <script>
 
 
-    Vue.component('anchored-heading', {
-      render: function (createElement) {
-        return createElement('div', [
-          Array.apply(null, {length: 20}).map(() => {
-            return createElement('p', 'hi')
-          })
-        ])
-      },
-      props: {
-        level: {
-          type: Number,
-          required: true
+    Vue.component('demo-template', {
+      render: function (h) {
+        if (this.items.length) {
+          return h('ul', this.items.map(item => {
+            return h('li', item.name)
+          }))
+        } else {
+          return h('p', 'No items found.')
         }
-      }
+      },
+      props: ['items']
     })
 
   var vm = new Vue({
     el: '#app-example',
     myOption: '全局混入',
     data: {
-      level: 1
+      items:[
+        {id: 1, name: 'name 1'},
+        {id: 2, name: 'name 2'},
+        {id: 3, name: 'name 3'},
+        {id: 4, name: 'name 4'},
+        {id: 5, name: 'name 5'},
+      ]
     },
     created: function () {
     },
